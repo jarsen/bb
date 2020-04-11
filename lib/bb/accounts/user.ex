@@ -25,7 +25,9 @@ defmodule BB.Accounts.User do
     |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/,
       message: "at least one digit or punctuation character"
     )
+    |> unsafe_validate_unique(:email, BB.Repo)
     |> maybe_encrypt_password()
+    |> unique_constraint(:email)
   end
 
   defp maybe_encrypt_password(changeset) do

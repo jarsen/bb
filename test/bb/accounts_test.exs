@@ -63,6 +63,13 @@ defmodule BB.AccountsTest do
                Accounts.register_user(%{email: "bill@microsoft.com", password: "dolphins"})
     end
 
+    test "register_user/1 ensures email is unique" do
+      user = fixture(:user)
+
+      assert {:error, %Ecto.Changeset{}} =
+               Accounts.register_user(%{email: user.email, password: user.password <> "2"})
+    end
+
     test "registration_user/1 returns a user changeset" do
       user = fixture(:user)
       assert %Ecto.Changeset{} = Accounts.registration_user(user)
