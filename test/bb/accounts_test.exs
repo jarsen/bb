@@ -29,6 +29,23 @@ defmodule BB.AccountsTest do
       assert nil == Accounts.get_user(12_837_123_123)
     end
 
+    test "get_user_by_email_and_password/2 with a non existing user returns nil" do
+      assert nil == Accounts.get_user_by_email_and_password("ghost@boo.confirmed_at", "scary")
+    end
+
+    test "get_user_by_email_and_password/2 with an incorrect password returns nil" do
+      user = fixture(:user)
+      assert nil == Accounts.get_user_by_email_and_password(user.email, "wrong password")
+    end
+
+    test "get_user_by_email_and_password/2 with an correct credentials returns user" do
+      user = fixture(:user)
+      user_id = user.id
+
+      assert %User{id: ^user_id} =
+               Accounts.get_user_by_email_and_password(user.email, user.password)
+    end
+
     test "register_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} =
                Accounts.register_user(%{email: "bill@microsoft.com", password: "S3cureP4$$w0rD"})

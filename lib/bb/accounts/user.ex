@@ -37,4 +37,14 @@ defmodule BB.Accounts.User do
       changeset
     end
   end
+
+  def valid_password?(%BB.Accounts.User{encrypted_password: encrypted_password} = user, password)
+      when is_binary(password) do
+    Bcrypt.verify_pass(password, encrypted_password)
+  end
+
+  def valid_password?(_) do
+    Bcrypt.hash_pwd_salt("unused hash to avoid timing attacks")
+    false
+  end
 end
