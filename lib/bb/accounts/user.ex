@@ -44,7 +44,6 @@ defmodule BB.Accounts.User do
   end
 
   def valid_password?(_) do
-    Bcrypt.hash_pwd_salt("unused hash to avoid timing attacks")
-    false
+    Bcrypt.no_user_verify()
   end
 end
