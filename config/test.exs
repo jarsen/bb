@@ -14,6 +14,9 @@ config :bb, BBWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :phoenix_integration,
+  endpoint: BBWeb.Endpoint
+
 # Print only warnings and errors during test
 config :logger, level: :warn
 

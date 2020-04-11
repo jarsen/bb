@@ -17,10 +17,8 @@ defmodule BBWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-  end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", BBWeb do
-  #   pipe_through :api
-  # end
+    get "/users/register", UserRegistrationController, :new
+    post "/users/register", UserRegistrationController, :create
+  end
 end
