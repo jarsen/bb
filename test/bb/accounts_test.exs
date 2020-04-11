@@ -23,6 +23,12 @@ defmodule BB.AccountsTest do
       assert %User{id: ^user_id} = Accounts.get_user!(user_id)
     end
 
+    test "get_user/1 returns the user with given id" do
+      %{id: user_id} = fixture(:user)
+      assert %User{id: ^user_id} = Accounts.get_user(user_id)
+      assert nil == Accounts.get_user(12_837_123_123)
+    end
+
     test "register_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} =
                Accounts.register_user(%{email: "bill@microsoft.com", password: "S3cureP4$$w0rD"})
