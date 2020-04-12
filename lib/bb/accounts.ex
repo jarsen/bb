@@ -58,6 +58,22 @@ defmodule BB.Accounts do
   end
 
   @doc """
+  Gets a user by email.
+
+  ## Examples
+
+      iex> get_user_by_email("foo@example.com")
+      %User{}
+
+      iex> get_user_by_emai("unknown@example.com")
+       nil
+
+  """
+  def get_user_by_email(email) when is_binary(email) do
+    Repo.get_by(User, email: email)
+  end
+
+  @doc """
   Registers a user.
 
   ## Examples

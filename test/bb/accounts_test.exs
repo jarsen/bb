@@ -46,6 +46,12 @@ defmodule BB.AccountsTest do
                Accounts.get_user_by_email_and_password(user.email, user.password)
     end
 
+    test "get_user_by_email/1 returns the user with the given email" do
+      %{email: email} = fixture(:user)
+      assert %User{email: ^email} = Accounts.get_user_by_email(email)
+      assert nil == Accounts.get_user_by_email("ghost@boo.com")
+    end
+
     test "register_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} =
                Accounts.register_user(%{email: "bill@microsoft.com", password: "S3cureP4$$w0rD"})
