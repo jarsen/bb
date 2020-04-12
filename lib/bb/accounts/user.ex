@@ -40,7 +40,7 @@ defmodule BB.Accounts.User do
     end
   end
 
-  def valid_password?(%BB.Accounts.User{encrypted_password: encrypted_password} = user, password)
+  def valid_password?(%BB.Accounts.User{encrypted_password: encrypted_password}, password)
       when is_binary(password) do
     Bcrypt.verify_pass(password, encrypted_password)
   end

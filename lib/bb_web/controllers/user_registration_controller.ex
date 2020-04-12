@@ -14,7 +14,7 @@ defmodule BBWeb.UserRegistrationController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> UserAuth.sign_in(user)
+        |> UserAuth.log_user_in(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
