@@ -2,6 +2,7 @@ defmodule BBWeb.UserAuth do
   import Plug.Conn
   import Phoenix.Controller
 
+  alias BBWeb.Router.Helpers, as: Routes
   alias BB.Accounts
 
   @doc """
@@ -39,7 +40,7 @@ defmodule BBWeb.UserAuth do
   @doc """
   Used for routes that requires the user to not be authenticated.
   """
-  def redirect_if_user_is_authenticated(conn, _opts) do
+  def require_unauthenticated_user(conn, _opts) do
     if conn.assigns[:current_user] do
       conn
       |> redirect(to: signed_in_path(conn))
@@ -57,9 +58,20 @@ defmodule BBWeb.UserAuth do
   def require_authenticated_user(conn, _opts) do
     if conn.assigns[:current_user] do
       conn
+      # |> maybe_require_email_confirmation()
     else
       conn
       |> redirect(to: signed_out_path(conn))
+      |> halt()
+    end
+  end
+
+  defp maybe_require_email_confirmation(conn) do
+    if conn.assigns.current_user.confirmed_at do
+      conn
+    else
+      conn
+      |> redirect(to: Routes.user_confirmation_path(conn, :new))
       |> halt()
     end
   end

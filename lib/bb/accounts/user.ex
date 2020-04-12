@@ -6,10 +6,19 @@ defmodule BB.Accounts.User do
     field :confirmed_at, :naive_datetime
     field :email, :string
     field :encrypted_password, :string
+    has_many :tokens, BB.Accounts.UserToken, foreign_key: :user_id
 
     field :password, :string, virtual: true
 
     timestamps()
+  end
+
+  @doc """
+  Confirms the account by setting `confirmed_at`.
+  """
+  def confirm_changeset(user) do
+    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+    change(user, confirmed_at: now)
   end
 
   @doc false

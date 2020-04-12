@@ -16,7 +16,7 @@ defmodule BBWeb.Router do
   end
 
   scope "/", BBWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [:browser, :require_unauthenticated_user]
 
     get "/users/register", UserRegistrationController, :new
     post "/users/register", UserRegistrationController, :create
@@ -29,5 +29,13 @@ defmodule BBWeb.Router do
 
     get "/", PageController, :index
     delete "/users/logout", UserSessionController, :delete
+  end
+
+  scope "/", BBWeb do
+    pipe_through [:browser]
+
+    get "/users/confirm/new", UserConfirmationController, :new
+    post "/users/confirm", UserConfirmationController, :create
+    get "/users/confirm/:token", UserConfirmationController, :confirm
   end
 end
