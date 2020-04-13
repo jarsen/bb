@@ -9,12 +9,13 @@ defmodule BBWeb.UserConfirmationController do
 
   def create(conn, %{"user" => %{"email" => email}}) do
     if user = Accounts.get_user_by_email(email) do
-      Accounts.deliver_confirmation_instructions(
+      Accounts.deliver_user_confirmation_instructions(
         user,
         &Routes.user_confirmation_url(conn, :confirm, &1)
       )
     end
 
+    # Regardless of the outcome, show an impartial success/error message.
     conn
     |> put_flash(
       :info,
@@ -35,8 +36,8 @@ defmodule BBWeb.UserConfirmationController do
 
       :error ->
         conn
-        |> put_flash(:error, "Confirmation token is invalid or it has expired.")
-        |> redirect(to: Routes.user_confirmation_path(conn, :new))
+        |> put_flash(:error, "Confirmation link is invalid or it has expired.")
+        |> redirect(to: "/")
     end
   end
 end

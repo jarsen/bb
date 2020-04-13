@@ -1,5 +1,6 @@
 defmodule BBWeb.UserSessionController do
   use BBWeb, :controller
+
   alias BB.Accounts
   alias BBWeb.UserAuth
 
@@ -7,17 +8,19 @@ defmodule BBWeb.UserSessionController do
     render(conn, "new.html", error_message: nil)
   end
 
-  def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
+  def create(conn, %{"user" => user_params}) do
+    %{"email" => email, "password" => password} = user_params
+
     if user = Accounts.get_user_by_email_and_password(email, password) do
-      UserAuth.log_user_in(conn, user)
+      UserAuth.login_user(conn, user, user_params)
     else
-      render(conn, "new.html", error_message: "Invalid email or password")
+      render(conn, "new.html", error_message: "Invalid e-mail or password")
     end
   end
 
   def delete(conn, _params) do
     conn
     |> put_flash(:info, "Logged out successfully.")
-    |> UserAuth.log_user_out()
+    |> UserAuth.logout_user()
   end
 end

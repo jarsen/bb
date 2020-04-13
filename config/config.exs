@@ -16,7 +16,7 @@ config :bb, BBWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "BUBYVcvQnZFpWqyE3A/f4dU7S26nHpoZYPlwh+7BZ2/Af4aGiSDNCVe0LiG2h4Ds",
   render_errors: [view: BBWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: BB.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: BB.PubSub,
   live_view: [signing_salt: "fjFxj2pW"]
 
 # Configures Elixir's Logger

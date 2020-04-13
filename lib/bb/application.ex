@@ -11,9 +11,10 @@ defmodule BB.Application do
       # Start the Ecto repository
       BB.Repo,
       # Start the endpoint when the application starts
-      BBWeb.Endpoint
+      BBWeb.Endpoint,
       # Starts a worker by calling: BB.Worker.start_link(arg)
       # {BB.Worker, arg},
+      {Phoenix.PubSub, [name: BB.PubSub, adapter: Phoenix.PubSub.PG2]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
