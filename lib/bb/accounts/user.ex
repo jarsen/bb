@@ -4,6 +4,7 @@ defmodule BB.Accounts.User do
 
   @derive {Inspect, except: [:password]}
   schema "users" do
+    field :name, :string
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
@@ -22,7 +23,8 @@ defmodule BB.Accounts.User do
   """
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :name])
+    |> validate_required([:name])
     |> validate_email()
     |> validate_password()
   end
@@ -55,6 +57,19 @@ defmodule BB.Accounts.User do
       |> delete_change(:password)
     else
       changeset
+    end
+  end
+
+  @doc """
+  A user changeset for changing the name.
+  """
+  def info_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name])
+    |> validate_required([:name])
+    |> case do
+      %{changes: %{name: _}} = changeset -> changeset
+      %{} = changeset -> add_error(changeset, :name, "did not change")
     end
   end
 

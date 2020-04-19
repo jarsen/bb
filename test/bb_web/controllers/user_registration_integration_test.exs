@@ -5,7 +5,7 @@ defmodule BBWeb.UserRegistrationIntegrationTest do
     get(conn, Routes.user_registration_path(conn, :new))
     |> follow_form(%{
       user: %{
-        # name: "New User",
+        name: "Bill Gates",
         email: "bill@microsoft.com",
         password: "some P4$sword"
         # confirm_password: "some P4$sword"
@@ -21,7 +21,7 @@ defmodule BBWeb.UserRegistrationIntegrationTest do
     get(conn, Routes.user_registration_path(conn, :new))
     |> follow_form(%{
       user: %{
-        # name: "New User",
+        name: "Bill Gates",
         email: "not an email",
         password: "some P4$sword"
         # confirm_password: "some P4$sword"

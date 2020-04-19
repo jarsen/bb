@@ -94,6 +94,27 @@ defmodule BB.Accounts do
   ## Settings
 
   @doc """
+  Returns an `%Ecto.Changeset{}` for changing the user name.
+
+  ## Examples
+
+      iex> change_user(user)
+      %Ecto.Changeset{data: %User{}}
+
+  """
+  def change_user_info(user, attrs \\ %{}) do
+    User.info_changeset(user, attrs)
+  end
+
+  @doc """
+  Updates the user name in token.
+  """
+  def update_user_info(user, attrs \\ %{}) do
+    change_user_info(user, attrs)
+    |> Repo.update()
+  end
+
+  @doc """
   Returns an `%Ecto.Changeset{}` for changing the user e-mail.
 
   ## Examples
