@@ -9,12 +9,24 @@
     <%= csrf_meta_tag() %>
   </head>
   <body class="bg-gray-100">
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <%= render "_user_menu.html", assigns %>
-        </nav>
-      </section>
+    <header class="flex justify-between py-2 items-center bg-gray-900">
+      <div>
+        <a href="/" class="text-gray-100 text-2xl m-4">Books, Bitches! 💄</a>
+      </div>
+      <div class="flex text-gray-100 text-lg">
+        <%= if @current_user do %>
+          <div>
+            <%= link @current_user.name , to: Routes.user_settings_path(@conn, :edit), class: "m-4" %>
+          </div>
+          <div>
+            <%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "m-4" %>
+          </div>
+        <% else %>
+          <div>
+            <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "m-4" %>
+          </div>
+        <% end %>
+      </div>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
