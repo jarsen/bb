@@ -1,35 +1,12 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
-</section>
+<div class="px-8 py-12">
+  <div class="flex">
+    <object data="/images/undraw_book_lover_mkck.svg" type="image/svg+xml" height="450" class="content-center"></object>
+  </div>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.4/CHANGELOG.md">v1.4 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on Freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-    </ul>
-  </article>
-</section>
+  <p class="mt-6 text-2xl font-bold text-gray-900 leading-loose"><span class="text-red-600">Books, Bitches!</span> is an exclusive collective of bibliophiles dedicated to the bespoke curation, discovery, and discussion of delightful bodies of text.</p>
+
+  <p class="mt-2 text-2xl font-bold text-gray-900 leading-loose">xoxo 💄</p>
+
+  <div class="mt-6">
+    <a href="#" class="inline-block px-5 py-3 rounded-lg shadow-lg bg-red-600 text-white uppercase tracking-wide font-semibold text-sm">Wow, I want to join.</a>
+  </div>

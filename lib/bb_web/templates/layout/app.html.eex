@@ -4,13 +4,12 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>BB 💄</title>
+    <title>B,B. 💄</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <%= csrf_meta_tag() %>
   </head>
-  <body>
+  <body class="bg-gray-100">
     <header>
-      <h1 class="font-sans">Books, Bitches!</h1>
       <section class="container">
         <nav role="navigation">
           <%= render "_user_menu.html", assigns %>
